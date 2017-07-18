@@ -29,7 +29,7 @@ using namespace std;
 
 void ConsoleLogger::log(const std::string &msg, ILogger::Type t) {
     if (t == ILogger::INFO)
-        cout << "INFO :" << msg << endl;
+        cout << "INFO : " << msg << endl;
     else if (t == ILogger::DEBUG)
         cout << "DEBUG : " << msg << endl;
     else if (t == ILogger::WARNING)
