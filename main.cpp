@@ -30,6 +30,6 @@ int main()
 {
     std::unique_ptr<ILogger> log = std::make_unique<ConsoleLogger>();
     log->log("Hello world !");
-    throw MyException("Trololo");
+
     return 0;
 }
