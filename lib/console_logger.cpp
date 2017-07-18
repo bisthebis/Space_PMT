@@ -21,13 +21,19 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-#include "lib/console_logger.h"
-#include <memory>
 
+#include "console_logger.h"
+#include "iostream"
 
-int main()
-{
-    std::unique_ptr<ILogger> log = std::make_unique<ConsoleLogger>();
-    log->log("Hello world !");
-    return 0;
+using namespace std;
+
+void ConsoleLogger::log(const std::string &msg, ILogger::Type t) {
+    if (t == ILogger::INFO)
+        cout << "INFO :" << msg << endl;
+    else if (t == ILogger::DEBUG)
+        cout << "DEBUG : " << msg << endl;
+    else if (t == ILogger::WARNING)
+        cout << "WARNING : " << msg << endl;
+    else if (t == ILogger::FATAL)
+        cerr << "DEBUG : " << msg << endl;
 }

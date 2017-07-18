@@ -21,13 +21,23 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-#include "lib/console_logger.h"
-#include <memory>
+#ifndef CONSOLE_LOGGER_H
+#define CONSOLE_LOGGER_H
 
+#include "logger.h"
 
-int main()
+/**
+ * @brief Logs sent to stdout or stderr
+ */
+class ConsoleLogger : public ILogger
 {
-    std::unique_ptr<ILogger> log = std::make_unique<ConsoleLogger>();
-    log->log("Hello world !");
-    return 0;
-}
+public:
+    /**
+     * @brief sends message to stdout or stderr
+     * @param msg : log message
+     * @param type : Whether message must be appended with "DEBUG", "INFO", "WARNING" or "ERROR". If it's error, output is stderr
+     */
+    virtual void log(const std::string& msg, ILogger::Type type = ILogger::INFO) override;
+};
+
+#endif // CONSOLE_LOGGER_H
