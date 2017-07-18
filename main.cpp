@@ -21,8 +21,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-#include "lib/console_logger.h"
-#include "lib/myexception.h"
+#include "utils/console_logger.h"
+#include "utils/myexception.h"
 #include <memory>
 
 
