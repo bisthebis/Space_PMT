@@ -24,6 +24,7 @@ SOFTWARE.
 
 #include "console_logger.h"
 #include "iostream"
+#include "myexception.h"
 
 using namespace std;
 
@@ -36,4 +37,6 @@ void ConsoleLogger::log(const std::string &msg, ILogger::Type t) {
         cout << "WARNING : " << msg << endl;
     else if (t == ILogger::FATAL)
         cerr << "DEBUG : " << msg << endl;
+    else
+        throw MyException("Incorrect value of ILogger::Type");
 }

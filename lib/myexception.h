@@ -21,15 +21,16 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-#include "lib/console_logger.h"
-#include "lib/myexception.h"
-#include <memory>
+#ifndef MYEXCEPTION_H
+#define MYEXCEPTION_H
 
+#include <exception>
+#include <string>
 
-int main()
-{
-    std::unique_ptr<ILogger> log = std::make_unique<ConsoleLogger>();
-    log->log("Hello world !");
-    throw MyException("Trololo");
-    return 0;
-}
+struct MyException : public std::exception {
+    std::string error;
+    MyException(const std::string& err) : error(err) {}
+    virtual const char* what() const noexcept {return error.c_str();}
+};
+
+#endif // MYEXCEPTION_H
