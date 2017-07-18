@@ -23,13 +23,15 @@ SOFTWARE.
 */
 #include "utils/console_logger.h"
 #include "utils/myexception.h"
+#include "game/player.h"
 #include <memory>
 
+std::unique_ptr<ILogger> ILogger::logger = std::make_unique<ConsoleLogger>();
 
 int main()
 {
-    std::unique_ptr<ILogger> log = std::make_unique<ConsoleLogger>();
-    log->log("Hello world !");
+    auto player = Player("Boris");
+    auto secondPlayer = Player::fromJson(player.toJson());
 
     return 0;
 }

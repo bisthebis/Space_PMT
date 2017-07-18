@@ -21,28 +21,26 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-#ifndef LOGGER_H
-#define LOGGER_H
+#ifndef PLAYER_H
+#define PLAYER_H
 
-#include <string>
+#include "utils/json.hpp"
 #include <memory>
+#include <string>
 
-#define LOG(str) ILogger::logger->log((str));
+/**
+ * @brief Class representing a serializable player.
+ */
+class Player
+{
+public:
+    Player(const std::string& name);
+    nlohmann::json toJson() const;
+    static std::unique_ptr<Player> fromJson(const nlohmann::json& src);
 
-/** @brief Interface for a simple logger, with flags to configure output (facultative)
- * */
-struct ILogger {
-    enum Type {
-        INFO, DEBUG, WARNING, FATAL
-    };
-
-    virtual void log(const std::string& msg, Type flag = INFO) = 0;
-
-
-    /**
-     * @brief Global instance
-     */
-    static std::unique_ptr<ILogger> logger;
+    const std::string& name() const;
+private:
+    std::string _name;
 };
 
-#endif // LOGGER_H
+#endif // PLAYER_H

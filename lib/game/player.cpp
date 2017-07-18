@@ -21,28 +21,31 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-#ifndef LOGGER_H
-#define LOGGER_H
+#include "player.h"
+#include "utils/console_logger.h"
 
-#include <string>
-#include <memory>
+using json = nlohmann::json;
 
-#define LOG(str) ILogger::logger->log((str));
+Player::Player(const std::string &name) : _name(name)
+{
 
-/** @brief Interface for a simple logger, with flags to configure output (facultative)
- * */
-struct ILogger {
-    enum Type {
-        INFO, DEBUG, WARNING, FATAL
-    };
+}
 
-    virtual void log(const std::string& msg, Type flag = INFO) = 0;
+const std::string& Player::name() const {return _name;}
 
+json Player::toJson() const {
+    json result;
 
-    /**
-     * @brief Global instance
-     */
-    static std::unique_ptr<ILogger> logger;
-};
+    result["name"] = name(); LOG(std::string("Serializing Player. Name is : ") + name());
 
-#endif // LOGGER_H
+    return result;
+}
+
+std::unique_ptr<Player> Player::fromJson(const json &src) {
+    //Throws if not found. (Cf Nlohmann::Json doc)
+    std::string name = src["name"];
+
+    LOG(std::string("Deserializing Player. Name extracted is : ") + name);
+
+    return std::make_unique<Player>(name);
+}

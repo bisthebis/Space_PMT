@@ -12,4 +12,4 @@ add_executable(${PROJECT_NAME}
 
 add_subdirectory(lib)
 
-target_link_libraries(${PROJECT_NAME} utils)
+target_link_libraries(${PROJECT_NAME} utils game)
