@@ -43,6 +43,9 @@ struct ILogger {
      * @brief Global instance
      */
     static std::unique_ptr<ILogger> logger;
+
+
+    virtual ~ILogger() {}
 };
 
 #endif // LOGGER_H
