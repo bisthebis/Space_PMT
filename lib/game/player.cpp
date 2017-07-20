@@ -36,7 +36,15 @@ const std::string& Player::name() const {return _name;}
 json Player::toJson() const {
     json result;
 
-    result["name"] = name(); LOG(std::string("Serializing Player. Name is : ") + name());
+
+    LOG("Serializing Player...")
+    result["name"] = name();
+    result["health"] = currentHealth();
+    result["max_health"] = maxHealth();
+    result["shield"] = shield();
+    result["attack"] = attack();
+
+    //LOG(result.dump(4));
 
     return result;
 }
@@ -63,5 +71,5 @@ int Player::maxHealth() const {
 }
 
 int Player::shield() const {
-    return shield();
+    return _shield;
 }
