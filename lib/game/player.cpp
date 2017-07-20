@@ -44,7 +44,7 @@ json Player::toJson() const {
     result["shield"] = shield();
     result["attack"] = attack();
 
-    //LOG(result.dump(4));
+    LOG(result.dump(4));
 
     return result;
 }
@@ -53,9 +53,15 @@ std::unique_ptr<Player> Player::fromJson(const json &src) {
     //Throws if not found. (Cf Nlohmann::Json doc)
     std::string name = src["name"];
 
-    LOG(std::string("Deserializing Player. Name extracted is : ") + name);
+    auto result = std::make_unique<Player>(name);
+    result->_health = src["health"];
+    result->_attack = src["attack"];
+    result->_shield = src["shield"];
 
-    return std::make_unique<Player>(name);
+    LOG(std::string("Deserializing Player... Source JSON is : "));
+    LOG(src.dump(4));
+
+    return result;
 }
 
 int Player::attack() const {
