@@ -49,3 +49,19 @@ std::unique_ptr<Player> Player::fromJson(const json &src) {
 
     return std::make_unique<Player>(name);
 }
+
+int Player::attack() const {
+    return _attack;
+}
+
+int Player::currentHealth() const {
+    return _health;
+}
+
+int Player::maxHealth() const {
+    return MAX_HEALTH;
+}
+
+int Player::shield() const {
+    return shield();
+}

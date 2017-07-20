@@ -21,37 +21,20 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-#ifndef PLAYER_H
-#define PLAYER_H
-
-#include "utils/json.hpp"
-#include "fighter.h"
-#include <memory>
-#include <string>
+#ifndef FIGHTER_H
+#define FIGHTER_H
 
 /**
- * @brief Class representing a serializable player.
+ * @brief Interface for entities able to fight each other (Player, Ennemies,...)
  */
-class Player : public IFighter
+class IFighter
 {
 public:
-    Player(const std::string& name);
-    nlohmann::json toJson() const;
-    static std::unique_ptr<Player> fromJson(const nlohmann::json& src);
-
-    const std::string& name() const;
-
-    virtual int shield() const override;
-    virtual int attack() const override;
-    virtual int currentHealth() const override;
-    virtual int maxHealth() const override;
-
-private:
-    std::string _name;
-    const int MAX_HEALTH = 100;
-    int _health = MAX_HEALTH;
-    int _shield = 10;
-    int _attack = 25;
+    ~IFighter() {}
+    virtual int shield() const = 0;
+    virtual int currentHealth() const = 0;
+    virtual int maxHealth() const = 0;
+    virtual int attack() const = 0;
 };
 
-#endif // PLAYER_H
+#endif // FIGHTER_H
