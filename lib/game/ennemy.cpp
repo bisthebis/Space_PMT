@@ -26,3 +26,23 @@ SOFTWARE.
 Ennemy::Ennemy(const EnnemyTemplate &src) : breed(src) {
 
 }
+
+const std::string& Ennemy::name() const {
+    return breed.name();
+}
+
+int Ennemy::attack() const {
+    return _attack;
+}
+
+int Ennemy::currentHealth() const {
+    return _health;
+}
+
+int Ennemy::maxHealth() const {
+    return breed.maxHealth();
+}
+
+int Ennemy::shield() const {
+    return _shield;
+}

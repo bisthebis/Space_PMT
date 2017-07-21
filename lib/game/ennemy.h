@@ -26,12 +26,24 @@ SOFTWARE.
 
 #include "fighter.h"
 #include "ennemy_template.h"
+#include <string>
 
 class Ennemy : public IFighter
 {
 public:
     Ennemy(const EnnemyTemplate& src);
     const EnnemyTemplate& breed;
+
+    const std::string& name() const;
+
+    virtual int shield() const override;
+    virtual int attack() const override;
+    virtual int currentHealth() const override;
+    virtual int maxHealth() const override;
+private:
+    int _health;
+    int _shield;
+    int _attack;
 };
 
 #endif // ENNEMY_H

@@ -24,11 +24,17 @@ SOFTWARE.
 #ifndef ENNEMY_TEMPLATE_H
 #define ENNEMY_TEMPLATE_H
 
+#include <string>
 
 class EnnemyTemplate
 {
 public:
     EnnemyTemplate();
+
+    int maxHealth() const;
+    int shield() const;
+    int attack() const;
+    const std::string& name() const;
 };
 
 #endif // ENNEMY_TEMPLATE_H
