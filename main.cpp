@@ -24,14 +24,29 @@ SOFTWARE.
 #include "utils/console_logger.h"
 #include "utils/myexception.h"
 #include "game/player.h"
+#include "game/ennemy.h"
 #include <memory>
 
 std::unique_ptr<ILogger> ILogger::logger = std::make_unique<ConsoleLogger>();
 
 int main()
 {
-    auto player = Player("Boris");
-    auto secondPlayer = Player::fromJson(player.toJson());
+    std::unique_ptr<IFighter> player = std::make_unique<Player>("Boris");
+    auto lonelyFighterBreed = EnnemyTemplate();
+    std::unique_ptr<IFighter> ennemy = std::make_unique<Ennemy>(lonelyFighterBreed);
+
+    while (player->isAlive() && ennemy->isAlive()) {
+        ennemy->receiveDamage(player->attack());
+        if (!ennemy->isAlive()) {
+            LOG("Ennemy killed !");
+            break;
+        }
+        player->receiveDamage(ennemy->attack());
+        if (!player->isAlive()) {
+            LOG("Player killed !");
+            break;
+        }
+    }
 
     return 0;
 }
