@@ -34,7 +34,7 @@ public:
     int maxHealth() const;
     int shield() const;
     int attack() const;
-    const std::string& name() const;
+    std::string name() const;
 };
 
 #endif // ENNEMY_TEMPLATE_H

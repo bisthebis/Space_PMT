@@ -27,3 +27,20 @@ EnnemyTemplate::EnnemyTemplate()
 {
 
 }
+
+std::string EnnemyTemplate::name() const {
+    static const std::string TEMPRARY_NAME = "Lonely fighter";
+    return TEMPRARY_NAME;
+}
+
+int EnnemyTemplate::attack() const {
+    return 20;
+}
+
+int EnnemyTemplate::maxHealth() const {
+    return 100;
+}
+
+int EnnemyTemplate::shield() const {
+    return 5;
+}

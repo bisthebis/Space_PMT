@@ -23,11 +23,11 @@ SOFTWARE.
 */
 #include "ennemy.h"
 
-Ennemy::Ennemy(const EnnemyTemplate &src) : breed(src) {
+Ennemy::Ennemy(const EnnemyTemplate &src) : breed(src), _health(src.maxHealth()), _shield(src.shield()), _attack(src.attack()) {
 
 }
 
-const std::string& Ennemy::name() const {
+std::string Ennemy::name() const {
     return breed.name();
 }
 

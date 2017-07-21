@@ -34,7 +34,7 @@ public:
     Ennemy(const EnnemyTemplate& src);
     const EnnemyTemplate& breed;
 
-    const std::string& name() const;
+    std::string name() const; //Return by value for added flexibility (EnnemyTemplate may return a non-member string)
 
     virtual int shield() const override;
     virtual int attack() const override;
