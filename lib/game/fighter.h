@@ -35,6 +35,17 @@ public:
     virtual int currentHealth() const = 0;
     virtual int maxHealth() const = 0;
     virtual int attack() const = 0;
+
+    bool isAlive() const {
+        return currentHealth() > 0;
+    }
+
+    /**
+     * @brief receiveDamage : endure damages from another source (i.e. an another fighter)
+     * @param attackValue : attack value of the Attacker
+     * @return true if it made the character die, false otherwise.
+     */
+    virtual bool receiveDamage(int attackValue) = 0;
 };
 
 #endif // FIGHTER_H

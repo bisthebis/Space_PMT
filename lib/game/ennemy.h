@@ -40,6 +40,8 @@ public:
     virtual int attack() const override;
     virtual int currentHealth() const override;
     virtual int maxHealth() const override;
+
+    virtual bool receiveDamage(int attackValue);
 private:
     int _health;
     int _shield;

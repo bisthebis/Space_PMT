@@ -46,6 +46,8 @@ public:
     virtual int currentHealth() const override;
     virtual int maxHealth() const override;
 
+    virtual bool receiveDamage(int attackValue) override;
+
 private:
     std::string _name;
     const int MAX_HEALTH = 100;

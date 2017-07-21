@@ -22,6 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 #include "ennemy.h"
+#include <algorithm> //std max
 
 Ennemy::Ennemy(const EnnemyTemplate &src) : breed(src), _health(src.maxHealth()), _shield(src.shield()), _attack(src.attack()) {
 
@@ -45,4 +46,16 @@ int Ennemy::maxHealth() const {
 
 int Ennemy::shield() const {
     return _shield;
+}
+
+bool Ennemy::receiveDamage(int attackValue) {
+
+    using std::max;
+
+    auto sustainedDamages = max(attackValue - shield(), 0);
+    _health = max(_health - sustainedDamages, 0);
+    if (currentHealth() == 0)
+        return true;
+    //If he's not dead
+    return false;
 }
