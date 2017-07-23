@@ -25,9 +25,12 @@ SOFTWARE.
 #include "utils/myexception.h"
 #include "game/player.h"
 #include "game/ennemy.h"
+#include "fight.h"
 #include <memory>
+#include <sstream>
 
 std::unique_ptr<ILogger> ILogger::logger = std::make_unique<ConsoleLogger>();
+auto& Log = *ILogger::logger;
 
 int main()
 {
@@ -35,18 +38,33 @@ int main()
     auto lonelyFighterBreed = EnnemyTemplate();
     std::unique_ptr<IFighter> ennemy = std::make_unique<Ennemy>(lonelyFighterBreed);
 
-    while (player->isAlive() && ennemy->isAlive()) {
-        ennemy->receiveDamage(player->attack());
-        if (!ennemy->isAlive()) {
-            LOG("Ennemy killed !");
+    Fight fight(*player, *ennemy);
+
+    auto giveResult = [&]() {
+        switch (fight.status()) {
+        case Fight::ENNEMY_DEAD:
+            Log.log("Victory !");
+            break;
+        case Fight::PLAYER_DEAD:
+            Log.log("You lost the fight...");
+            break;
+        default:
+            Log.log("You managed to beat your opponent, but your ship is crashing.");
             break;
         }
-        player->receiveDamage(ennemy->attack());
-        if (!player->isAlive()) {
-            LOG("Player killed !");
-            break;
-        }
-    }
+    };
+
+    do {
+        //Player status & ennemy status
+        std::ostringstream status;
+        status << "Player health is : " << player->currentHealth() << ". ";
+        status << "Ennemy health is : " << ennemy->currentHealth() << '.';
+        Log.log(status.str());
+
+        fight.step();
+    } while (fight.status() == Fight::BOTH_ALIVE);
+
+    giveResult();
 
     return 0;
 }

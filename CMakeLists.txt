@@ -8,6 +8,7 @@ include_directories(lib)
 
 add_executable(${PROJECT_NAME}
     main.cpp
+    fight.h fight.cpp
     )
 
 add_subdirectory(lib)
